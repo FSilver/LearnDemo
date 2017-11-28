@@ -29,6 +29,7 @@
 		6DADF84E1FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DADF8501FC53C2F0009F21B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DADF8511FC53C2F0009F21B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B280FE8F1FCDB46B00349ED4 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,6 +74,7 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B280FE8F1FCDB46B00349ED4 /* 1.png */,
 				6DADF8421FC53C2F0009F21B /* AppDelegate.h */,
 				6DADF8431FC53C2F0009F21B /* AppDelegate.m */,
 				6DADF8451FC53C2F0009F21B /* ViewController.h */,
@@ -358,7 +360,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4EEABPE23;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fw.LearnDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,7 +376,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4EEABPE23;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fw.LearnDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
