@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF361FD0F18000083CEA /* ViewController.m */; };
 		6D46DF3D1FD0F18100083CEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF371FD0F18000083CEA /* AppDelegate.m */; };
-		6D46DF3E1FD0F18100083CEA /* UIApplication+Hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF3B1FD0F18000083CEA /* UIApplication+Hook.m */; };
+		6D46DF471FD12DD000083CEA /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D46DF401FD12DD000083CEA /* 1.png */; };
+		6D46DF481FD12DD000083CEA /* UIApplication+Hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF421FD12DD000083CEA /* UIApplication+Hook.m */; };
+		6D46DF4D1FD12E3100083CEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF4B1FD12E3000083CEA /* main.m */; };
+		6D46DF4E1FD12E3100083CEA /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D46DF4C1FD12E3100083CEA /* Info.plist */; };
 		6DADF84A1FC53C2F0009F21B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF8481FC53C2F0009F21B /* Main.storyboard */; };
 		6DADF84C1FC53C2F0009F21B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF84B1FC53C2F0009F21B /* Assets.xcassets */; };
 		6DADF84F1FC53C2F0009F21B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF84D1FC53C2F0009F21B /* LaunchScreen.storyboard */; };
-		6DADF8521FC53C2F0009F21B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DADF8511FC53C2F0009F21B /* main.m */; };
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -24,14 +26,15 @@
 		6D46DF371FD0F18000083CEA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6D46DF381FD0F18000083CEA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6D46DF391FD0F18000083CEA /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6D46DF3A1FD0F18000083CEA /* UIApplication+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Hook.h"; sourceTree = "<group>"; };
-		6D46DF3B1FD0F18000083CEA /* UIApplication+Hook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Hook.m"; sourceTree = "<group>"; };
+		6D46DF401FD12DD000083CEA /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		6D46DF411FD12DD000083CEA /* UIApplication+Hook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Hook.h"; sourceTree = "<group>"; };
+		6D46DF421FD12DD000083CEA /* UIApplication+Hook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Hook.m"; sourceTree = "<group>"; };
+		6D46DF4B1FD12E3000083CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D46DF4C1FD12E3100083CEA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DADF83F1FC53C2F0009F21B /* LearnDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DADF8491FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DADF84B1FC53C2F0009F21B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DADF84E1FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6DADF8501FC53C2F0009F21B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DADF8511FC53C2F0009F21B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -55,6 +58,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D46DF3F1FD12DD000083CEA /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				6D46DF401FD12DD000083CEA /* 1.png */,
+				6D46DF411FD12DD000083CEA /* UIApplication+Hook.h */,
+				6D46DF421FD12DD000083CEA /* UIApplication+Hook.m */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		6D46DF431FD12DD000083CEA /* FWWebImage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FWWebImage;
+			sourceTree = "<group>";
+		};
+		6D46DF441FD12DD000083CEA /* resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		6DADF8361FC53C2F0009F21B = {
 			isa = PBXGroup;
 			children = (
@@ -76,17 +103,18 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6D46DF431FD12DD000083CEA /* FWWebImage */,
+				6D46DF441FD12DD000083CEA /* resource */,
+				6D46DF3F1FD12DD000083CEA /* Test */,
 				6D46DF381FD0F18000083CEA /* AppDelegate.h */,
 				6D46DF371FD0F18000083CEA /* AppDelegate.m */,
-				6D46DF3A1FD0F18000083CEA /* UIApplication+Hook.h */,
-				6D46DF3B1FD0F18000083CEA /* UIApplication+Hook.m */,
 				6D46DF391FD0F18000083CEA /* ViewController.h */,
 				6D46DF361FD0F18000083CEA /* ViewController.m */,
+				6D46DF4C1FD12E3100083CEA /* Info.plist */,
+				6D46DF4B1FD12E3000083CEA /* main.m */,
 				6DADF8481FC53C2F0009F21B /* Main.storyboard */,
 				6DADF84B1FC53C2F0009F21B /* Assets.xcassets */,
 				6DADF84D1FC53C2F0009F21B /* LaunchScreen.storyboard */,
-				6DADF8501FC53C2F0009F21B /* Info.plist */,
-				6DADF8511FC53C2F0009F21B /* main.m */,
 			);
 			path = LearnDemo;
 			sourceTree = "<group>";
@@ -162,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DADF84F1FC53C2F0009F21B /* LaunchScreen.storyboard in Resources */,
+				6D46DF471FD12DD000083CEA /* 1.png in Resources */,
 				6DADF84C1FC53C2F0009F21B /* Assets.xcassets in Resources */,
+				6D46DF4E1FD12E3100083CEA /* Info.plist in Resources */,
 				6DADF84A1FC53C2F0009F21B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,9 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D46DF481FD12DD000083CEA /* UIApplication+Hook.m in Sources */,
 				6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */,
-				6D46DF3E1FD0F18100083CEA /* UIApplication+Hook.m in Sources */,
-				6DADF8521FC53C2F0009F21B /* main.m in Sources */,
+				6D46DF4D1FD12E3100083CEA /* main.m in Sources */,
 				6D46DF3D1FD0F18100083CEA /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4EEABPE23;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fw.LearnDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -382,7 +412,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4EEABPE23;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fw.LearnDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
