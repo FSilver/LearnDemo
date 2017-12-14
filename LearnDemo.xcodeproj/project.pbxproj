@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D3184831FE2ACB4000923E2 /* FWMonitorMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D3184821FE2ACB4000923E2 /* FWMonitorMgr.m */; };
 		6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF361FD0F18000083CEA /* ViewController.m */; };
 		6D46DF3D1FD0F18100083CEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46DF371FD0F18000083CEA /* AppDelegate.m */; };
 		6D46DF471FD12DD000083CEA /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D46DF401FD12DD000083CEA /* 1.png */; };
@@ -22,6 +23,9 @@
 /* Begin PBXFileReference section */
 		4FE005B8574F0A1111BAFC35 /* Pods-LearnDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LearnDemo/Pods-LearnDemo.release.xcconfig"; sourceTree = "<group>"; };
 		68E9F22ABD4A7B0869C6B456 /* Pods-LearnDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LearnDemo/Pods-LearnDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		6D3184811FE2ACB4000923E2 /* FWMonitorMgr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWMonitorMgr.h; sourceTree = "<group>"; };
+		6D3184821FE2ACB4000923E2 /* FWMonitorMgr.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWMonitorMgr.m; sourceTree = "<group>"; };
+		6D3184841FE2ADFA000923E2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6D46DF361FD0F18000083CEA /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6D46DF371FD0F18000083CEA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6D46DF381FD0F18000083CEA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,9 +57,19 @@
 		2AF39DA01AB890A6FFDDD988 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D3184841FE2ADFA000923E2 /* QuartzCore.framework */,
 				F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D3184801FE2AA42000923E2 /* Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				6D3184811FE2ACB4000923E2 /* FWMonitorMgr.h */,
+				6D3184821FE2ACB4000923E2 /* FWMonitorMgr.m */,
+			);
+			path = Monitor;
 			sourceTree = "<group>";
 		};
 		6D46DF3F1FD12DD000083CEA /* Test */ = {
@@ -89,6 +103,7 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6D3184801FE2AA42000923E2 /* Monitor */,
 				6D46DF3F1FD12DD000083CEA /* Test */,
 				6D46DF381FD0F18000083CEA /* AppDelegate.h */,
 				6D46DF371FD0F18000083CEA /* AppDelegate.m */,
@@ -243,6 +258,7 @@
 				6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */,
 				6D46DF4D1FD12E3100083CEA /* main.m in Sources */,
 				6D46DF3D1FD0F18100083CEA /* AppDelegate.m in Sources */,
+				6D3184831FE2ACB4000923E2 /* FWMonitorMgr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
