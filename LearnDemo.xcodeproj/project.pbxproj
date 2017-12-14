@@ -68,20 +68,6 @@
 			path = Test;
 			sourceTree = "<group>";
 		};
-		6D46DF431FD12DD000083CEA /* FWWebImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FWWebImage;
-			sourceTree = "<group>";
-		};
-		6D46DF441FD12DD000083CEA /* resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = resource;
-			sourceTree = "<group>";
-		};
 		6DADF8361FC53C2F0009F21B = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +89,6 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
-				6D46DF431FD12DD000083CEA /* FWWebImage */,
-				6D46DF441FD12DD000083CEA /* resource */,
 				6D46DF3F1FD12DD000083CEA /* Test */,
 				6D46DF381FD0F18000083CEA /* AppDelegate.h */,
 				6D46DF371FD0F18000083CEA /* AppDelegate.m */,
