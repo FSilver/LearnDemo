@@ -21,6 +21,8 @@
 		6DADF84C1FC53C2F0009F21B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF84B1FC53C2F0009F21B /* Assets.xcassets */; };
 		6DADF84F1FC53C2F0009F21B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF84D1FC53C2F0009F21B /* LaunchScreen.storyboard */; };
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
+		B23FD9DD1FDBA94B008F7D66 /* FWDownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B23FD9DC1FDBA94B008F7D66 /* FWDownLoadOperation.m */; };
+		B23FD9E01FDBA985008F7D66 /* FWDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B23FD9DF1FDBA985008F7D66 /* FWDownLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,10 @@
 		6DADF8491FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DADF84B1FC53C2F0009F21B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DADF84E1FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B23FD9DB1FDBA94B008F7D66 /* FWDownLoadOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDownLoadOperation.h; sourceTree = "<group>"; };
+		B23FD9DC1FDBA94B008F7D66 /* FWDownLoadOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDownLoadOperation.m; sourceTree = "<group>"; };
+		B23FD9DE1FDBA985008F7D66 /* FWDownLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDownLoader.h; sourceTree = "<group>"; };
+		B23FD9DF1FDBA985008F7D66 /* FWDownLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDownLoader.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +132,7 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B23FD9DA1FDBA915008F7D66 /* FWWebImage */,
 				6D3184801FE2AA42000923E2 /* Monitor */,
 				6D46DF3F1FD12DD000083CEA /* Test */,
 				6D46DF381FD0F18000083CEA /* AppDelegate.h */,
@@ -148,6 +155,17 @@
 				4FE005B8574F0A1111BAFC35 /* Pods-LearnDemo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B23FD9DA1FDBA915008F7D66 /* FWWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				B23FD9DB1FDBA94B008F7D66 /* FWDownLoadOperation.h */,
+				B23FD9DC1FDBA94B008F7D66 /* FWDownLoadOperation.m */,
+				B23FD9DE1FDBA985008F7D66 /* FWDownLoader.h */,
+				B23FD9DF1FDBA985008F7D66 /* FWDownLoader.m */,
+			);
+			path = FWWebImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,10 +297,15 @@
 			files = (
 				6D0B8B611FE3BF5E00BE9DC6 /* FWMonitorView.m in Sources */,
 				6D46DF481FD12DD000083CEA /* UIApplication+Hook.m in Sources */,
+				B23FD9E01FDBA985008F7D66 /* FWDownLoader.m in Sources */,
 				6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */,
 				6D0B8B511FE3A9BD00BE9DC6 /* FWBacktraceLogger.m in Sources */,
 				6D46DF4D1FD12E3100083CEA /* main.m in Sources */,
+
 				6D0B8B441FE370DD00BE9DC6 /* FWPerformanceInfo.m in Sources */,
+
+				B23FD9DD1FDBA94B008F7D66 /* FWDownLoadOperation.m in Sources */,
+
 				6D46DF3D1FD0F18100083CEA /* AppDelegate.m in Sources */,
 				6D3184831FE2ACB4000923E2 /* FWMonitorMgr.m in Sources */,
 			);
