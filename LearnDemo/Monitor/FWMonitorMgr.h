@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#include <mach/mach.h>
-#include <mach/task_info.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#import "FWPerformanceInfo.h"
 
 @interface FWMonitorMgr : NSObject
 
 +(instancetype)sharedInstance;
 
-
-
+-(void)start;
+-(void)stop;
+-(BOOL)isRunning;
+-(void)reciveInfo:(void(^)(FWPerformanceInfo* info))performance;
+-(void)reciveANR:(void(^)(NSArray* anrs))anrs;
 
 @end

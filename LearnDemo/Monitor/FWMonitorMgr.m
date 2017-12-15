@@ -8,16 +8,42 @@
 
 #import "FWMonitorMgr.h"
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+#include <mach/mach.h>
+#include <mach/task_info.h>
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#import "FWBacktraceLogger.h"
+
+static NSTimeInterval  anr_time_out_interval = 0.1;
+
+typedef void (^DataBlock)(FWPerformanceInfo* info);
+typedef void (^ANRBlock)(NSArray* anrs);
 
 @interface FWMonitorMgr()
 {
+    //fps 相关
     CADisplayLink *_fpsLink;
     NSUInteger _count;
     NSTimeInterval _lastTime;
+    float _fpsValue;
     
+    //事件源: 0.5s一次的定时器
+    dispatch_source_t  _loopSource;
+    
+    //性能汇总
+    FWPerformanceInfo *_performanceInfo;
+    
+    //判断是否在运行
+    BOOL _isRunning;
+    
+    //卡顿检测
+    dispatch_queue_t  _anr_queue;
+    dispatch_semaphore_t _semphore;
+    NSMutableArray *_anrArray;
+    BOOL _watch;
 }
-
+@property(nonatomic,copy)DataBlock dataBlock;
+@property(nonatomic,copy)ANRBlock anrBlock;
 
 @end
 
@@ -34,7 +60,85 @@
 }
 
 
+-(id)init
+{
+    self = [super init];
+    if(self){
+        _performanceInfo = [[FWPerformanceInfo alloc]init];
+        _anr_queue = dispatch_queue_create("com.lizhi.fm.lz_event_monitor_queue", NULL);
+        _semphore = dispatch_semaphore_create(0);
+        _anrArray = [NSMutableArray array];
+    }
+    return self;
+}
 
+-(void)start {
+    _isRunning = YES;
+    [self startFpsDisplayLink];
+    [self startLoopForMemoryAndCpu];
+    [self startWatchANR];
+}
+
+-(void)stop {
+    
+    [self stopFpsDisplayLink];
+    [self stopLoopForMemoryAndCpu];
+    [self stopWatcch];
+    _isRunning = NO;
+}
+
+-(BOOL)isRunning
+{
+    return _isRunning;
+}
+
+-(void)reciveInfo:(void(^)(FWPerformanceInfo* info))performance
+{
+    self.dataBlock = performance;
+}
+
+-(void)reciveANR:(void(^)(NSArray* anrs))anrs
+{
+    self.anrBlock = anrs;
+}
+
+#pragma mark - 间隔循环获取 cpu  memroy
+
+-(void)startLoopForMemoryAndCpu {
+    
+    if(_loopSource){
+        return;
+    }
+    __weak typeof(self) _self = self;
+    _loopSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+    dispatch_source_set_timer(_loopSource, dispatch_walltime(NULL, 0), 0.5f * NSEC_PER_SEC, 0);//等待0s后开始，0.5s的间隔，0s的误差
+    dispatch_source_set_event_handler(_loopSource, ^{
+        __strong typeof(_self) self = _self;
+    
+        _performanceInfo.usedCpu = [self getUsedCPU];
+        _performanceInfo.usedMemory = [self getUsedMemory];
+        _performanceInfo.fps = _fpsValue;
+        NSLog(@"cpu = %f  ,memory = %f , fps = %f",_performanceInfo.usedCpu,_performanceInfo.usedMemory/(1024*1024), _performanceInfo.fps);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(self.dataBlock){
+                self.dataBlock(_performanceInfo);
+            }
+        });
+    });
+    //开启source
+    dispatch_resume(_loopSource);
+}
+
+-(void)stopLoopForMemoryAndCpu {
+    
+    if(_loopSource){
+        dispatch_source_cancel(_loopSource);
+        _loopSource = nil;
+    }
+}
+
+#pragma mark - cpu 信息获取
 - (float)getUsedCPU
 {
     kern_return_t kr;
@@ -111,7 +215,7 @@
 
 - (void)startFpsDisplayLink
 {
-    if (nil == _fpsLink) {
+    if (!_fpsLink) {
         _fpsLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
         [_fpsLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
@@ -119,8 +223,10 @@
 
 - (void)stopFpsDisplayLink
 {
-    [_fpsLink invalidate];
-    _fpsLink = nil;
+    if(_fpsLink){
+        [_fpsLink invalidate];
+        _fpsLink = nil;
+    }
 }
 
 - (void)tick:(CADisplayLink *)displayLink
@@ -132,13 +238,74 @@
     
     _count ++;
     NSTimeInterval delta = displayLink.timestamp - _lastTime;
-    if (1 > delta) {
+    if (delta < 1) {
         return;
     }
-    
+    _fpsValue = _count / delta;
     _lastTime = displayLink.timestamp;
-    int fps = _count / delta;
     _count = 0;
+}
+
+
+#pragma mark - 获取主线程 卡顿堆栈
+
+-(void)startWatchANR
+{
+    _watch = YES;
+    dispatch_async(_anr_queue, ^{
+        while (_watch) {
+            __block BOOL timeOut = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                timeOut = NO;
+                dispatch_semaphore_signal(_semphore);
+            });
+            //等待主线程0.1s,若果主线程 执行某个人物超过了0.1s ，那么timeOut = YES,说明有卡顿
+            [NSThread sleepForTimeInterval: anr_time_out_interval];
+            if(timeOut){
+                
+                NSString *start = @"--------------ANR start--------------------";
+                
+                NSString *time = [self dateOfNow];
+                NSString *perStr = [_performanceInfo descriptionInOneLine];
+                
+                NSString *main = @">>>>>>>>> MainThread <<<<<<<<<<";
+                NSString *mainThreadStr = [FWBacktraceLogger fw_backtraceOfMainThread];
+                
+                NSString *all = @">>>>>>>>> allThread <<<<<<<<<<";
+                NSString *allThreadStr = [FWBacktraceLogger fw_backtraceOfAllThread];
+                
+                NSString *end = @"--------------ANR end--------------------";
+                
+                NSString *text = [NSString stringWithFormat:@"\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n%@\n",start,time,perStr,main,mainThreadStr,all,allThreadStr,end];
+                
+                [_anrArray addObject:text];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(self.anrBlock){
+                        self.anrBlock(_anrArray);
+                    }
+                });
+                NSLog(@"text: %@",text);
+                dispatch_wait(_semphore, DISPATCH_TIME_FOREVER);
+            }
+        }
+    });
+}
+
+
+-(void)stopWatcch
+{
+    _watch = NO;
+}
+
+-(NSString*)dateOfNow
+{
+    NSDate *currentDate = [NSDate date];
+    //用于格式化NSDate对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设置格式：zzz表示时区
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+    return [dateFormatter stringFromDate:currentDate];
 }
 
 
