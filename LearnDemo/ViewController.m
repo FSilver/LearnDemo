@@ -13,6 +13,7 @@
 #import "SDWebImageManager.h"
 #import "UIView+WebCache.h"
 #import <WebKit/WebKit.h>
+#import "FWMonitorView.h"
 
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate>
@@ -27,6 +28,7 @@
 @end
 
 @implementation ViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,18 +51,21 @@
     [btn1 addTarget:self action:@selector(hello) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn1];
     _button = btn1;
+
+
+    
+    FWMonitorView *view = [FWMonitorView monitor];
+    [self.view addSubview:view];
 }
 
 
 -(void)hello:(UIButton*)btn {
     
-    if(!_imageView){
-        _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 250, 336, 210)];
-        [self.view addSubview:_imageView];
-    }
-   [_imageView sd_setImageWithURL:[NSURL URLWithString:@"http://47.88.148.22/car.jpg"] placeholderImage:[UIImage imageNamed:@"1.png"]];
-}
 
+    
+  
+    
+}
 
 
 @end
