@@ -20,6 +20,9 @@
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
 		B23FD9DD1FDBA94B008F7D66 /* FWDownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B23FD9DC1FDBA94B008F7D66 /* FWDownLoadOperation.m */; };
 		B23FD9E01FDBA985008F7D66 /* FWDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B23FD9DF1FDBA985008F7D66 /* FWDownLoader.m */; };
+		B2C7878E1FE35E3300B73123 /* LZMonitorCore.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C787891FE35E3200B73123 /* LZMonitorCore.m */; };
+		B2C7878F1FE35E3300B73123 /* LZThreadLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C7878A1FE35E3200B73123 /* LZThreadLogger.m */; };
+		B2C787901FE35E3300B73123 /* LZPerformanceData.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C7878D1FE35E3300B73123 /* LZPerformanceData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,12 @@
 		B23FD9DC1FDBA94B008F7D66 /* FWDownLoadOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDownLoadOperation.m; sourceTree = "<group>"; };
 		B23FD9DE1FDBA985008F7D66 /* FWDownLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDownLoader.h; sourceTree = "<group>"; };
 		B23FD9DF1FDBA985008F7D66 /* FWDownLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDownLoader.m; sourceTree = "<group>"; };
+		B2C787881FE35E3200B73123 /* LZThreadLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZThreadLogger.h; sourceTree = "<group>"; };
+		B2C787891FE35E3200B73123 /* LZMonitorCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZMonitorCore.m; sourceTree = "<group>"; };
+		B2C7878A1FE35E3200B73123 /* LZThreadLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZThreadLogger.m; sourceTree = "<group>"; };
+		B2C7878B1FE35E3300B73123 /* LZMonitorCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZMonitorCore.h; sourceTree = "<group>"; };
+		B2C7878C1FE35E3300B73123 /* LZPerformanceData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPerformanceData.h; sourceTree = "<group>"; };
+		B2C7878D1FE35E3300B73123 /* LZPerformanceData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPerformanceData.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,6 +81,12 @@
 		6D3184801FE2AA42000923E2 /* Monitor */ = {
 			isa = PBXGroup;
 			children = (
+				B2C7878B1FE35E3300B73123 /* LZMonitorCore.h */,
+				B2C787891FE35E3200B73123 /* LZMonitorCore.m */,
+				B2C7878C1FE35E3300B73123 /* LZPerformanceData.h */,
+				B2C7878D1FE35E3300B73123 /* LZPerformanceData.m */,
+				B2C787881FE35E3200B73123 /* LZThreadLogger.h */,
+				B2C7878A1FE35E3200B73123 /* LZThreadLogger.m */,
 				6D3184811FE2ACB4000923E2 /* FWMonitorMgr.h */,
 				6D3184821FE2ACB4000923E2 /* FWMonitorMgr.m */,
 			);
@@ -273,6 +288,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D46DF481FD12DD000083CEA /* UIApplication+Hook.m in Sources */,
+				B2C7878F1FE35E3300B73123 /* LZThreadLogger.m in Sources */,
+				B2C787901FE35E3300B73123 /* LZPerformanceData.m in Sources */,
+				B2C7878E1FE35E3300B73123 /* LZMonitorCore.m in Sources */,
 				B23FD9E01FDBA985008F7D66 /* FWDownLoader.m in Sources */,
 				6D46DF3C1FD0F18100083CEA /* ViewController.m in Sources */,
 				6D46DF4D1FD12E3100083CEA /* main.m in Sources */,
