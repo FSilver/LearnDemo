@@ -14,7 +14,7 @@
 #import "UIView+WebCache.h"
 #import <WebKit/WebKit.h>
 #import "FWMonitorView.h"
-
+#import "QiniuSDK.h"
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate>
 {
@@ -29,7 +29,7 @@
 
 @implementation ViewController
 
-
+__weak NSString *string_weak_ = nil;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -44,28 +44,61 @@
         [self.view addSubview:btn1];
     }
     
-    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn1.backgroundColor = [UIColor yellowColor];
-    [btn1 setTitle:@"Tes" forState:UIControlStateNormal];
-    btn1.frame = CGRectMake(100, 100, 200, 100);
-    [btn1 addTarget:self action:@selector(hello) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn1];
-    _button = btn1;
-
-
     
-    FWMonitorView *view = [FWMonitorView monitor];
-    [self.view addSubview:view];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
+    imageView.image = [UIImage imageNamed:@"myImg"];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:imageView.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:imageView.bounds.size];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+    //设置大小
+    maskLayer.frame = imageView.bounds;
+    //设置图形样子
+    maskLayer.path = maskPath.CGPath;
+    imageView.layer.mask = maskLayer;
+    [self.view addSubview:imageView];
+    
+    
+//    UIImageView *panelView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 200, 150, 100)];
+//    panelView.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:panelView];
+//
+//    UIGraphicsBeginImageContextWithOptions(panelView.bounds.size,NO,1.0);
+//    //使用贝塞尔曲线画出一个圆形图
+//    [[UIBezierPath bezierPathWithRoundedRect:panelView.bounds cornerRadius:panelView.frame.size.width]addClip];
+//    [panelView drawRect:panelView.bounds];
+//    panelView.image =UIGraphicsGetImageFromCurrentImageContext();
+//    //结束画图
+//    UIGraphicsEndImageContext();
 }
+
 
 
 -(void)hello:(UIButton*)btn {
     
-
-    
-  
     
 }
+
+
+
+- (void)uploadImageToQNFilePath:(NSString *)filePath {
+    NSString *token = @"RIAkhLz5PTc04rfZ1-90UlboNBPm-xQZAl7CvchM:Qrypl0QNMpKFk9TV7Ywy0auMuJo=:eyJzY29wZSI6ImxpemhpLWZtLWFwcC11cGxvYWRlciIsImRlYWRsaW5lIjoxNTE0OTYyMDAwfQ==";
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil progressHandler:^(NSString *key, float percent) {
+        NSLog(@"percent == %.2f", percent);
+    }
+                                                                 params:nil
+                                                               checkCrc:NO
+                                                     cancellationSignal:nil];
+    NSLog(@"putFile ");
+    [upManager putFile:filePath key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+        NSLog(@"info ===== %@", info);
+        NSLog(@"resp ===== %@", resp);
+    }
+                option:uploadOption];
+    NSLog(@"上传完毕？");
+}
+
+
 
 
 @end
