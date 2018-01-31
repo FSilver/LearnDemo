@@ -69,12 +69,15 @@ __weak NSString *string_weak_ = nil;
 //    panelView.image =UIGraphicsGetImageFromCurrentImageContext();
 //    //结束画图
 //    UIGraphicsEndImageContext();
+    
+    //master 1
+    //master 2
 }
 
 
 
 -(void)hello:(UIButton*)btn {
-    
+    //This is master  by  only.
     
 }
 
