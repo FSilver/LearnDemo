@@ -69,13 +69,17 @@ __weak NSString *string_weak_ = nil;
 //    panelView.image =UIGraphicsGetImageFromCurrentImageContext();
 //    //结束画图
 //    UIGraphicsEndImageContext();
+    
+    //master 1
+    //master 2
 }
 
 
 
 -(void)hello:(UIButton*)btn {
-    //this is a develop branch.
-    //this is two changes for branch.
+
+    //this is a develop branch after merge 1
+
 }
 
 
