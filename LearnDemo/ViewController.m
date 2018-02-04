@@ -11,7 +11,7 @@
 #import "FWDownLoader.h"
 
 static NSString  *const url1 = @"http://47.88.148.22/car.jpg";
-static NSString  *const url2 = @"";
+static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943/f0b31ff20a03490881723e4b50a65e97.png_160x160.jpeg";
 
 @interface ViewController ()
 {
