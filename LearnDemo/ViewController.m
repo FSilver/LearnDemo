@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 #import "UIImageView+WebCache.h"
+#import "FWDownLoader.h"
+
+static NSString  *const url1 = @"http://47.88.148.22/car.jpg";
+static NSString  *const url2 = @"";
 
 @interface ViewController ()
 {
@@ -34,12 +38,23 @@
 }
 
 -(void)hello {
-    
+   
     if(!_imageView){
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 100, 336, 210)];
         [self.view addSubview:_imageView];
     }
-   [_imageView sd_setImageWithURL:[NSURL URLWithString:@"http://47.88.148.22/car.jpg"] placeholderImage:[UIImage imageNamed:@"1.png"]];
+   //[_imageView sd_setImageWithURL:[NSURL URLWithString:@"http://47.88.148.22/car.jpg"] placeholderImage:[UIImage imageNamed:@"1.png"]];
+    
+    
+    [[FWDownLoader sharedInstance]downLoadWithURL:[NSURL URLWithString:url1] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL *targetURL) {
+        NSLog(@"progress: %f",receivedSize*1.0/expectedSize * 100);
+    } completed:^(NSData *data, NSError *error, BOOL finished) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+             _imageView.image = [[UIImage alloc]initWithData:data];
+        });
+       
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

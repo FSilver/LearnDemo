@@ -14,6 +14,8 @@
 		6DADF84F1FC53C2F0009F21B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF84D1FC53C2F0009F21B /* LaunchScreen.storyboard */; };
 		6DADF8521FC53C2F0009F21B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DADF8511FC53C2F0009F21B /* main.m */; };
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
+		B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F137202745F20002589B /* FWDownLoader.m */; };
+		B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F139202745F20002589B /* FWDownLoadOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,10 @@
 		6DADF8501FC53C2F0009F21B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DADF8511FC53C2F0009F21B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B280FE8F1FCDB46B00349ED4 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		B2A7F136202745F20002589B /* FWDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWDownLoader.h; sourceTree = "<group>"; };
+		B2A7F137202745F20002589B /* FWDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoader.m; sourceTree = "<group>"; };
+		B2A7F138202745F20002589B /* FWDownLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWDownLoadOperation.h; sourceTree = "<group>"; };
+		B2A7F139202745F20002589B /* FWDownLoadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoadOperation.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -74,6 +80,7 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B2A7F135202745F20002589B /* FWWebImage */,
 				B280FE8F1FCDB46B00349ED4 /* 1.png */,
 				6DADF8421FC53C2F0009F21B /* AppDelegate.h */,
 				6DADF8431FC53C2F0009F21B /* AppDelegate.m */,
@@ -95,6 +102,17 @@
 				4FE005B8574F0A1111BAFC35 /* Pods-LearnDemo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B2A7F135202745F20002589B /* FWWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				B2A7F136202745F20002589B /* FWDownLoader.h */,
+				B2A7F137202745F20002589B /* FWDownLoader.m */,
+				B2A7F138202745F20002589B /* FWDownLoadOperation.h */,
+				B2A7F139202745F20002589B /* FWDownLoadOperation.m */,
+			);
+			path = FWWebImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +241,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DADF8471FC53C2F0009F21B /* ViewController.m in Sources */,
+				B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */,
 				6DADF8521FC53C2F0009F21B /* main.m in Sources */,
+				B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */,
 				6DADF8441FC53C2F0009F21B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,7 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4EEABPE23;
+				DEVELOPMENT_TEAM = 55LUCY937U;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -376,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4EEABPE23;
+				DEVELOPMENT_TEAM = 55LUCY937U;
 				INFOPLIST_FILE = LearnDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
