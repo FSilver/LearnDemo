@@ -22,8 +22,8 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 @property(nonatomic,strong)NSMutableArray<FWCallbacksDictionary*> *callbackBlockArray;
 
 
-@property (assign, getter=isExecuting) BOOL executing;
-@property (assign, getter=isFinished) BOOL finished;
+@property (nonatomic, assign,getter=isExecuting) BOOL executing;
+@property (assign,nonatomic ,getter=isFinished) BOOL finished;
 
 
 @end
@@ -53,6 +53,9 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
     NSLog(@"cancel");
 }
 
+
+//start 和 main同时写，只会执行start
+//不写start那么执行main
 -(void)start
 {
     NSLog(@"start");
@@ -77,6 +80,19 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
         callbackDict[kCompletedCallbackKey] = [completeBlock copy];
     }
     [self.callbackBlockArray addObject:callbackDict];
+}
+
+
+- (void)setFinished:(BOOL)finished {
+    [self willChangeValueForKey:@"isFinished"];
+    _finished = finished;
+    [self didChangeValueForKey:@"isFinished"];
+}
+
+- (void)setExecuting:(BOOL)executing {
+    [self willChangeValueForKey:@"isExecuting"];
+    _executing = executing;
+    [self didChangeValueForKey:@"isExecuting"];
 }
 
 #pragma mark NSURLSessionDataDelegate
@@ -108,10 +124,8 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
     const NSInteger totalSize = self.loadData.length;
     BOOL finished = (totalSize >= self.expectedSize);
     if(finished){
-        for (FWCallbacksDictionary  *dict  in self.callbackBlockArray) {
-            FWDownLoaderCompletedBlock completedBlock = dict[kCompletedCallbackKey];
-            completedBlock(_loadData,nil,YES);
-        }
+        [self callCompletionBlockWithData:data error:nil finished:YES];
+        self.finished = YES;
     }
     NSLog(@"didReceiveData");
 }
@@ -119,6 +133,10 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler
 {
     
+    
+//    if(completionHandler){
+//        completionHandler(cachedResponse);
+//    }
     NSLog(@"completionHandler");
 }
 
@@ -128,6 +146,19 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
    NSLog(@"error");
+}
+
+
+#pragma mark -Helper methods
+
+-(void)callCompletionBlockWithData:(NSData*)data  error:(NSError*)error  finished:(BOOL)finished
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (FWCallbacksDictionary  *dict  in self.callbackBlockArray) {
+            FWDownLoaderCompletedBlock completedBlock = dict[kCompletedCallbackKey];
+            completedBlock(data,error,finished);
+        }
+    });
 }
 
 

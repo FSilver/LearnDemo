@@ -38,6 +38,48 @@ static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943
 }
 
 -(void)hello {
+    
+    
+    
+    dispatch_queue_t queue = dispatch_queue_create("thread", DISPATCH_QUEUE_CONCURRENT);  
+    dispatch_async(queue, ^{  
+        sleep(3);  
+        NSLog(@"test1");  
+    });  
+    dispatch_async(queue, ^{  
+        NSLog(@"test2");  
+    });  
+    dispatch_sync(queue, ^{  
+        NSLog(@"test3");  
+    });  
+    dispatch_barrier_async(queue, ^{      ///分界线在这里 请注意是同步的  
+        sleep(1);  
+        for (int i = 0; i<50; i++) {  
+            if (i == 10 ) {  
+                NSLog(@"point1");  
+            }else if(i == 20){  
+                NSLog(@"point2");  
+            }else if(i == 40){  
+                NSLog(@"point3");  
+            }  
+        }  
+    });  
+    NSLog(@"hello");  
+    dispatch_async(queue, ^{  
+        NSLog(@"test4");  
+    });  
+    NSLog(@"world");  
+    dispatch_async(queue, ^{  
+        NSLog(@"test5");  
+    });  
+    dispatch_async(queue, ^{  
+        NSLog(@"test6");  
+    });  
+    
+    
+    
+    
+    return;
    
     if(!_imageView){
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 100, 336, 210)];
