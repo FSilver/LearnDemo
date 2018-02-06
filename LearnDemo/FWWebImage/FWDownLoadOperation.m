@@ -104,7 +104,6 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
     NSInteger expected = (NSInteger)response.expectedContentLength;
     self.expectedSize = expected;
     self.loadData = [[NSMutableData alloc]initWithCapacity:expected];
-    NSLog(@"didReceiveResponse expected = %ld   data = %ld",expected, self.loadData.length);
     if(completionHandler){
         completionHandler(NSURLSessionResponseAllow);
     }
@@ -145,11 +144,17 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-   NSLog(@"error");
+    NSLog(@"error");
+    [self callCompletionBlockWithError:error];
 }
 
 
 #pragma mark -Helper methods
+
+-(void)callCompletionBlockWithError:(NSError*)error
+{
+    [self callCompletionBlockWithData:nil error:error finished:NO];
+}
 
 -(void)callCompletionBlockWithData:(NSData*)data  error:(NSError*)error  finished:(BOOL)finished
 {
@@ -160,6 +165,7 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
         }
     });
 }
+
 
 
 
