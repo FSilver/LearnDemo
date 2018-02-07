@@ -12,10 +12,22 @@ typedef void  (^FWDownLoaderProgressBlock)(NSInteger receivedSize,NSInteger expe
 typedef void (^FWDownLoaderCompletedBlock)(NSData *data ,NSError *error ,BOOL finished);
 
 
+@interface FWDownLoadToken : NSObject
+
+@property(nonatomic,strong)NSURL *url;
+@property(nonatomic,strong)NSDictionary *downLoadTokenDict;
+
+@end
+
+
 @interface FWDownLoader : NSObject
 
 +(instancetype)sharedInstance;
 
--(void)downLoadWithURL:(NSURL*)url progress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completedBlock;
+-(FWDownLoadToken*)downLoadWithURL:(NSURL*)url progress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completedBlock;
+
+-(void)cancel:(FWDownLoadToken*)token;
+
+
 
 @end

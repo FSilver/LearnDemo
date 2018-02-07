@@ -70,7 +70,7 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
     NSLog(@"main");
 }
 
--(void)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock
+-(NSDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock
 {
     FWCallbacksDictionary *callbackDict = [NSMutableDictionary new];
     if(progressBlock){
@@ -80,6 +80,21 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
         callbackDict[kCompletedCallbackKey] = [completeBlock copy];
     }
     [self.callbackBlockArray addObject:callbackDict];
+    return callbackDict;
+}
+
+
+-(BOOL)cancel:(NSDictionary*)token
+{
+    BOOL shouldCancel = NO;
+    [self.callbackBlockArray removeObjectIdenticalTo:(FWCallbacksDictionary*)token];
+    if(self.callbackBlockArray.count == 0){
+        shouldCancel = YES;
+    }
+    if(shouldCancel){
+        [self cancel];
+    }
+    return shouldCancel;
 }
 
 

@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "FWDownLoader.h"
 
+
+
 @interface FWDownLoadOperation : NSOperation<NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
 
 @property(nonatomic,readonly,strong)NSURLSessionDataTask *dataTask;
 
 -( id)initWithRequest:(NSURLRequest*)request inSession:(NSURLSession*)session;
 
--(void)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock;
+-(NSDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock;
+
+-(BOOL)cancel:(NSDictionary*)token;
 
 @end

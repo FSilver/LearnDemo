@@ -9,6 +9,8 @@
 #import "FWDownLoader.h"
 #import "FWDownLoadOperation.h"
 
+@implementation FWDownLoadToken
+@end
 //dispatch_barrier_sync 等待队列中早期任务完成，才开始执行后面的
 
 @interface FWDownLoader()<NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
@@ -50,14 +52,18 @@
     return self;
 }
 
--(void)downLoadWithURL:(NSURL*)url progress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completedBlock
+-(FWDownLoadToken*)downLoadWithURL:(NSURL*)url progress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completedBlock
 {
     if(!url){
-        if(completedBlock != nil){
-            completedBlock(nil,nil,NO);
-        }
-        return;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(completedBlock != nil){
+                completedBlock(nil,nil,NO);
+            }
+        });
+        return nil;
     }
+    
+    __block  FWDownLoadToken *token = nil;
     
     //意思是，把barrierQueue中的，前的任务执行完，才执行这个block
     dispatch_barrier_sync(self.barrierQueue, ^{
@@ -69,11 +75,26 @@
             [self.downLoadQueue addOperation:operation];
             _urlOpertaionDict[url] = operation;
         }
-        [operation addHandlerForProgress:progressBlock completed:completedBlock];
+        NSDictionary *callBackDict = [operation addHandlerForProgress:progressBlock completed:completedBlock];
         operation.completionBlock = ^{
             [self.urlOpertaionDict removeObjectForKey:url];
         };
+        
+        token = [[FWDownLoadToken alloc]init];
+        token.url = url;
+        token.downLoadTokenDict = callBackDict;
     });
+    
+    return token;
+}
+
+-(void)cancel:(FWDownLoadToken*)token
+{
+    FWDownLoadOperation *operation = self.urlOpertaionDict[token.url];
+    if(operation){
+        [operation cancel:token.downLoadTokenDict];
+    }
+    
 }
 
 #pragma mark Helper methods
