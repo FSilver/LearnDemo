@@ -39,7 +39,7 @@
     if(self){
         
         _downLoadQueue = [[NSOperationQueue alloc]init];
-        _downLoadQueue.name = @"com.fw.download";
+        _downLoadQueue.name = @"com.FWDownLoader.download";
         _downLoadQueue.maxConcurrentOperationCount = 10;
         
         _urlOpertaionDict = [NSMutableDictionary dictionary];
@@ -72,29 +72,29 @@
         if(!operation){
             NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:15.0];
             operation = [[FWDownLoadOperation alloc]initWithRequest:urlRequest inSession:_session];
+            operation.completionBlock = ^{
+                [self.urlOpertaionDict removeObjectForKey:url];
+            };
             [self.downLoadQueue addOperation:operation];
             _urlOpertaionDict[url] = operation;
         }
-        NSDictionary *callBackDict = [operation addHandlerForProgress:progressBlock completed:completedBlock];
-        operation.completionBlock = ^{
-            [self.urlOpertaionDict removeObjectForKey:url];
-        };
-        
+        FWCallbacksDictionary *callBackDict = [operation addHandlerForProgress:progressBlock completed:completedBlock];
         token = [[FWDownLoadToken alloc]init];
         token.url = url;
         token.downLoadTokenDict = callBackDict;
     });
-    
     return token;
 }
 
 -(void)cancel:(FWDownLoadToken*)token
 {
-    FWDownLoadOperation *operation = self.urlOpertaionDict[token.url];
-    if(operation){
-        [operation cancel:token.downLoadTokenDict];
-    }
-    
+    dispatch_barrier_async(self.barrierQueue, ^{
+        FWDownLoadOperation *operation = self.urlOpertaionDict[token.url];
+        BOOL canceled =  [operation cancel:token.downLoadTokenDict];
+        if(canceled){
+            [self.urlOpertaionDict removeObjectForKey:token.url];
+        }
+    });
 }
 
 #pragma mark Helper methods
@@ -118,10 +118,12 @@
 }
 
 #pragma mark -NSURLSessionDataDelegate
+//这些回调方法虽然都在不同的线程上，但是他们的顺序是按照预期的
 
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
 {
     //这个是number = 4
+    [self printCurentThread:@"response"];
     FWDownLoadOperation *dataOperation = [self operationWithTask:dataTask];
     [dataOperation URLSession:session dataTask:dataTask didReceiveResponse:response completionHandler:completionHandler];
 }
@@ -129,6 +131,7 @@
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
     //统一下载任务，在这个方法里可以出现不同的线程 如 number = 4,number = 5,number = 6
+    [self printCurentThread:@"receiveData"];
     FWDownLoadOperation *dataOperation = [self operationWithTask:dataTask];
     [dataOperation URLSession:session dataTask:dataTask didReceiveData:data];
 }
@@ -136,6 +139,7 @@
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler
 {
     //这个是number = 6
+    [self printCurentThread:@"willCache"];
     FWDownLoadOperation *dataOperation = [self operationWithTask:dataTask];
     [dataOperation URLSession:session dataTask:dataTask willCacheResponse:proposedResponse completionHandler:completionHandler];
 }
@@ -144,6 +148,7 @@
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
+    [self printCurentThread:@"error"];
     FWDownLoadOperation *dataOperation = [self operationWithTask:task];
     [dataOperation URLSession:session task:task didCompleteWithError:error];
 }

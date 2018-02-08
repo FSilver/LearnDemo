@@ -8,10 +8,7 @@
 
 #import "FWDownLoadOperation.h"
 
-static NSString *const kProgressCallbackKey = @"progress";
-static NSString *const kCompletedCallbackKey = @"complete";
 
-typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 
 @interface FWDownLoadOperation()
 
@@ -20,6 +17,7 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 @property (strong, nonatomic) NSMutableData *loadData;
 @property (nonatomic,assign)NSInteger expectedSize;
 @property(nonatomic,strong)NSMutableArray<FWCallbacksDictionary*> *callbackBlockArray;
+@property(nonatomic,strong)dispatch_queue_t  barrierQueue;
 
 
 @property (nonatomic, assign,getter=isExecuting) BOOL executing;
@@ -44,13 +42,9 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
         _request = request;
         _session = session;
         _callbackBlockArray = [NSMutableArray array];
+        _barrierQueue = dispatch_queue_create("com.FWDownLoadOperation.barrierQueue", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
-}
-
--(void)cancel
-{
-    NSLog(@"cancel");
 }
 
 
@@ -70,9 +64,9 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
     NSLog(@"main");
 }
 
--(NSDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock
+-(FWCallbacksDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock
 {
-    FWCallbacksDictionary *callbackDict = [NSMutableDictionary new];
+    FWCallbacksDictionary *callbackDict = [NSMutableDictionary dictionary];
     if(progressBlock){
         callbackDict[kProgressCallbackKey] = [progressBlock copy];
     }
@@ -84,10 +78,10 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 }
 
 
--(BOOL)cancel:(NSDictionary*)token
+-(BOOL)cancel:(FWCallbacksDictionary*)token
 {
     BOOL shouldCancel = NO;
-    [self.callbackBlockArray removeObjectIdenticalTo:(FWCallbacksDictionary*)token];
+    [self.callbackBlockArray removeObjectIdenticalTo:token];
     if(self.callbackBlockArray.count == 0){
         shouldCancel = YES;
     }
@@ -141,7 +135,6 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
         [self callCompletionBlockWithData:data error:nil finished:YES];
         self.finished = YES;
     }
-    NSLog(@"didReceiveData");
 }
 
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler
@@ -159,7 +152,6 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    NSLog(@"error");
     [self callCompletionBlockWithError:error];
 }
 

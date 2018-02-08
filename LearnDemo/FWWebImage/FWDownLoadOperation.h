@@ -17,8 +17,8 @@
 
 -( id)initWithRequest:(NSURLRequest*)request inSession:(NSURLSession*)session;
 
--(NSDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock;
+-(FWCallbacksDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock;
 
--(BOOL)cancel:(NSDictionary*)token;
+-(BOOL)cancel:(FWCallbacksDictionary*)token;
 
 @end

@@ -12,10 +12,14 @@ typedef void  (^FWDownLoaderProgressBlock)(NSInteger receivedSize,NSInteger expe
 typedef void (^FWDownLoaderCompletedBlock)(NSData *data ,NSError *error ,BOOL finished);
 
 
+static NSString *const kProgressCallbackKey = @"progress";
+static NSString *const kCompletedCallbackKey = @"complete";
+typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
+
 @interface FWDownLoadToken : NSObject
 
 @property(nonatomic,strong)NSURL *url;
-@property(nonatomic,strong)NSDictionary *downLoadTokenDict;
+@property(nonatomic,strong)FWCallbacksDictionary *downLoadTokenDict;
 
 @end
 
