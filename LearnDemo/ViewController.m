@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "UIImageView+WebCache.h"
 #import "FWDownLoader.h"
+#import "Test.h"
 
 static NSString  *const url1 = @"http://47.88.148.22/car.jpg";
 static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943/f0b31ff20a03490881723e4b50a65e97.png_160x160.jpeg";
@@ -16,7 +17,10 @@ static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943
 @interface ViewController ()
 {
     UIImageView *_imageView;
+    Test *_test;
 }
+@property(nonatomic,strong)NSOperationQueue *downLoadQueue;
+
 @end
 
 @implementation ViewController
@@ -25,27 +29,35 @@ static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943
     [super viewDidLoad];
     
     
+    _test = [Test new];
+    [_test addObserver:self forKeyPath:@"isFlag" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn.frame = CGRectMake(100, 400, 100, 30);
     [btn setTitle:@"test" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(hello) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
-    
-    
-    
-    // Do any additional setup after loading the view, typically from a nib.
+
 }
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    
+     NSLog(@"key: %@   change : %@",keyPath, change);
+}
+
 
 -(void)hello {
     
 
+
+  
     if(!_imageView){
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 100, 336, 210)];
         [self.view addSubview:_imageView];
     }
-   //[_imageView sd_setImageWithURL:[NSURL URLWithString:@"http://47.88.148.22/car.jpg"] placeholderImage:[UIImage imageNamed:@"1.png"]];
-    
+  
     
     FWDownLoadToken *token1 =  [[FWDownLoader sharedInstance]downLoadWithURL:[NSURL URLWithString:url1] progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL *targetURL) {
 
@@ -53,12 +65,12 @@ static NSString  *const url2 = @"https://cdn2.51julebu.com/club/img/160512153943
 
     } completed:^(NSData *data, NSError *error, BOOL finished) {
         
-       // NSLog(@"data = %@ error = %@  ,finished = %d",data,error,finished);
+        NSLog(@"error = %@  ,finished = %d",error,finished);
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"1 下载完毕");
-             _imageView.image = [[UIImage alloc]initWithData:data];
-        });
+        
+        NSLog(@"下载结束 %d",finished);
+        _imageView.image = [[UIImage alloc]initWithData:data];
+    
        
     }];
     

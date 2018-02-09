@@ -16,6 +16,7 @@
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
 		B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F137202745F20002589B /* FWDownLoader.m */; };
 		B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F139202745F20002589B /* FWDownLoadOperation.m */; };
+		B2A7F141202C83660002589B /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F140202C83660002589B /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		B2A7F137202745F20002589B /* FWDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoader.m; sourceTree = "<group>"; };
 		B2A7F138202745F20002589B /* FWDownLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWDownLoadOperation.h; sourceTree = "<group>"; };
 		B2A7F139202745F20002589B /* FWDownLoadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoadOperation.m; sourceTree = "<group>"; };
+		B2A7F13F202C83660002589B /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		B2A7F140202C83660002589B /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +114,8 @@
 				B2A7F137202745F20002589B /* FWDownLoader.m */,
 				B2A7F138202745F20002589B /* FWDownLoadOperation.h */,
 				B2A7F139202745F20002589B /* FWDownLoadOperation.m */,
+				B2A7F13F202C83660002589B /* Test.h */,
+				B2A7F140202C83660002589B /* Test.m */,
 			);
 			path = FWWebImage;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				6DADF8471FC53C2F0009F21B /* ViewController.m in Sources */,
 				B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */,
 				6DADF8521FC53C2F0009F21B /* main.m in Sources */,
+				B2A7F141202C83660002589B /* Test.m in Sources */,
 				B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */,
 				6DADF8441FC53C2F0009F21B /* AppDelegate.m in Sources */,
 			);

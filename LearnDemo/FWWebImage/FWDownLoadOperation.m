@@ -48,21 +48,24 @@
 }
 
 
+
+#pragma mark - 线程 启动 关闭 重置
 //start 和 main同时写，只会执行start
 //不写start那么执行main
 -(void)start
 {
+    if(self.isCancelled){
+        [self done];
+        return;
+    }
     NSLog(@"start");
+    [self printCurentThread:@"start "];
     
     _dataTask = [_session dataTaskWithRequest:_request];
     self.executing = YES;
     [self.dataTask resume];
 }
 
--(void)main
-{
-    NSLog(@"main");
-}
 
 -(FWCallbacksDictionary*)addHandlerForProgress:(FWDownLoaderProgressBlock)progressBlock completed:(FWDownLoaderCompletedBlock)completeBlock
 {
@@ -89,6 +92,22 @@
         [self cancel];
     }
     return shouldCancel;
+}
+
+-(void)cancel
+{
+    if(self.isFinished){
+        return;
+    }
+    [self done];
+}
+
+
+-(void)done {
+
+     _dataTask = nil;
+    self.executing = NO;
+    self.finished = YES;
 }
 
 
@@ -128,22 +147,15 @@
         FWDownLoaderProgressBlock progressBlock = dict[kProgressCallbackKey];
         progressBlock(self.loadData.length,self.expectedSize,self.request.URL);
     }
-    
     const NSInteger totalSize = self.loadData.length;
     BOOL finished = (totalSize >= self.expectedSize);
     if(finished){
         [self callCompletionBlockWithData:data error:nil finished:YES];
-        self.finished = YES;
     }
 }
 
 -(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask willCacheResponse:(NSCachedURLResponse *)proposedResponse completionHandler:(void (^)(NSCachedURLResponse * _Nullable))completionHandler
 {
-    
-    
-//    if(completionHandler){
-//        completionHandler(cachedResponse);
-//    }
     NSLog(@"completionHandler");
 }
 
@@ -164,7 +176,8 @@
 }
 
 -(void)callCompletionBlockWithData:(NSData*)data  error:(NSError*)error  finished:(BOOL)finished
-{
+{    
+    [self done];
     dispatch_async(dispatch_get_main_queue(), ^{
         for (FWCallbacksDictionary  *dict  in self.callbackBlockArray) {
             FWDownLoaderCompletedBlock completedBlock = dict[kCompletedCallbackKey];
@@ -174,7 +187,11 @@
 }
 
 
-
+-(void)printCurentThread:(NSString*)str
+{
+    NSThread *thread = [NSThread currentThread];
+    NSLog(@"%@ thread : %@",str,thread);
+}
 
 @end
 

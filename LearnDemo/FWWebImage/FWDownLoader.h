@@ -32,6 +32,6 @@ typedef NSMutableDictionary<NSString* ,id> FWCallbacksDictionary;
 
 -(void)cancel:(FWDownLoadToken*)token;
 
-
+-(void)cacelAllDownLoads;
 
 @end

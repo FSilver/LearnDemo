@@ -97,6 +97,11 @@
     });
 }
 
+-(void)cacelAllDownLoads
+{
+    [self.downLoadQueue cancelAllOperations];
+}
+
 #pragma mark Helper methods
 
 -(FWDownLoadOperation*)operationWithTask:(NSURLSessionTask *)task {
