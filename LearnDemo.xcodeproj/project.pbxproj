@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D4A204420313C3A00DF0CD3 /* FWImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A204320313C3A00DF0CD3 /* FWImageManager.m */; };
+		6D4A20472031419900DF0CD3 /* FWDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A20462031419900DF0CD3 /* FWDataCache.m */; };
+		6D4A204A2031726200DF0CD3 /* UIImageView+FWImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A20492031726200DF0CD3 /* UIImageView+FWImage.m */; };
+		6D4A204C2031788300DF0CD3 /* de.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A204B2031788300DF0CD3 /* de.png */; };
 		6DADF8441FC53C2F0009F21B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DADF8431FC53C2F0009F21B /* AppDelegate.m */; };
 		6DADF8471FC53C2F0009F21B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DADF8461FC53C2F0009F21B /* ViewController.m */; };
 		6DADF84A1FC53C2F0009F21B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DADF8481FC53C2F0009F21B /* Main.storyboard */; };
@@ -16,12 +20,18 @@
 		942F472648C2C6D039B65874 /* libPods-LearnDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */; };
 		B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F137202745F20002589B /* FWDownLoader.m */; };
 		B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F139202745F20002589B /* FWDownLoadOperation.m */; };
-		B2A7F141202C83660002589B /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7F140202C83660002589B /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4FE005B8574F0A1111BAFC35 /* Pods-LearnDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LearnDemo/Pods-LearnDemo.release.xcconfig"; sourceTree = "<group>"; };
 		68E9F22ABD4A7B0869C6B456 /* Pods-LearnDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LearnDemo/Pods-LearnDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		6D4A204220313C3A00DF0CD3 /* FWImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWImageManager.h; sourceTree = "<group>"; };
+		6D4A204320313C3A00DF0CD3 /* FWImageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWImageManager.m; sourceTree = "<group>"; };
+		6D4A20452031419900DF0CD3 /* FWDataCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FWDataCache.h; sourceTree = "<group>"; };
+		6D4A20462031419900DF0CD3 /* FWDataCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FWDataCache.m; sourceTree = "<group>"; };
+		6D4A20482031726200DF0CD3 /* UIImageView+FWImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FWImage.h"; sourceTree = "<group>"; };
+		6D4A20492031726200DF0CD3 /* UIImageView+FWImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FWImage.m"; sourceTree = "<group>"; };
+		6D4A204B2031788300DF0CD3 /* de.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = de.png; sourceTree = "<group>"; };
 		6DADF83F1FC53C2F0009F21B /* LearnDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DADF8421FC53C2F0009F21B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6DADF8431FC53C2F0009F21B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -32,13 +42,10 @@
 		6DADF84E1FC53C2F0009F21B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DADF8501FC53C2F0009F21B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DADF8511FC53C2F0009F21B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B280FE8F1FCDB46B00349ED4 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		B2A7F136202745F20002589B /* FWDownLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWDownLoader.h; sourceTree = "<group>"; };
 		B2A7F137202745F20002589B /* FWDownLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoader.m; sourceTree = "<group>"; };
 		B2A7F138202745F20002589B /* FWDownLoadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FWDownLoadOperation.h; sourceTree = "<group>"; };
 		B2A7F139202745F20002589B /* FWDownLoadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FWDownLoadOperation.m; sourceTree = "<group>"; };
-		B2A7F13F202C83660002589B /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		B2A7F140202C83660002589B /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		F8B01845374171F524FA7A77 /* libPods-LearnDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LearnDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -83,8 +90,8 @@
 		6DADF8411FC53C2F0009F21B /* LearnDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6D4A204B2031788300DF0CD3 /* de.png */,
 				B2A7F135202745F20002589B /* FWWebImage */,
-				B280FE8F1FCDB46B00349ED4 /* 1.png */,
 				6DADF8421FC53C2F0009F21B /* AppDelegate.h */,
 				6DADF8431FC53C2F0009F21B /* AppDelegate.m */,
 				6DADF8451FC53C2F0009F21B /* ViewController.h */,
@@ -114,8 +121,12 @@
 				B2A7F137202745F20002589B /* FWDownLoader.m */,
 				B2A7F138202745F20002589B /* FWDownLoadOperation.h */,
 				B2A7F139202745F20002589B /* FWDownLoadOperation.m */,
-				B2A7F13F202C83660002589B /* Test.h */,
-				B2A7F140202C83660002589B /* Test.m */,
+				6D4A20452031419900DF0CD3 /* FWDataCache.h */,
+				6D4A20462031419900DF0CD3 /* FWDataCache.m */,
+				6D4A204220313C3A00DF0CD3 /* FWImageManager.h */,
+				6D4A204320313C3A00DF0CD3 /* FWImageManager.m */,
+				6D4A20482031726200DF0CD3 /* UIImageView+FWImage.h */,
+				6D4A20492031726200DF0CD3 /* UIImageView+FWImage.m */,
 			);
 			path = FWWebImage;
 			sourceTree = "<group>";
@@ -183,6 +194,7 @@
 			files = (
 				6DADF84F1FC53C2F0009F21B /* LaunchScreen.storyboard in Resources */,
 				6DADF84C1FC53C2F0009F21B /* Assets.xcassets in Resources */,
+				6D4A204C2031788300DF0CD3 /* de.png in Resources */,
 				6DADF84A1FC53C2F0009F21B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,9 +260,11 @@
 				6DADF8471FC53C2F0009F21B /* ViewController.m in Sources */,
 				B2A7F13A202745F30002589B /* FWDownLoader.m in Sources */,
 				6DADF8521FC53C2F0009F21B /* main.m in Sources */,
-				B2A7F141202C83660002589B /* Test.m in Sources */,
+				6D4A20472031419900DF0CD3 /* FWDataCache.m in Sources */,
 				B2A7F13B202745F30002589B /* FWDownLoadOperation.m in Sources */,
+				6D4A204420313C3A00DF0CD3 /* FWImageManager.m in Sources */,
 				6DADF8441FC53C2F0009F21B /* AppDelegate.m in Sources */,
+				6D4A204A2031726200DF0CD3 /* UIImageView+FWImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

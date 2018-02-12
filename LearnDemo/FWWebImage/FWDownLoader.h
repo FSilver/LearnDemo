@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void  (^FWDownLoaderProgressBlock)(NSInteger receivedSize,NSInteger expectedSize, NSURL *targetURL);
-typedef void (^FWDownLoaderCompletedBlock)(NSData *data ,NSError *error ,BOOL finished);
+typedef void (^FWDownLoaderCompletedBlock)(UIImage *image, NSData *data ,NSError *error ,BOOL finished);
 
 
 static NSString *const kProgressCallbackKey = @"progress";

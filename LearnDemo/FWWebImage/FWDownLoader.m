@@ -57,7 +57,7 @@
     if(!url){
         dispatch_async(dispatch_get_main_queue(), ^{
             if(completedBlock != nil){
-                completedBlock(nil,nil,NO);
+                completedBlock(nil,nil,nil,NO);
             }
         });
         return nil;
@@ -118,8 +118,8 @@
 
 -(void)printCurentThread:(NSString*)str
 {
-    NSThread *thread = [NSThread currentThread];
-    NSLog(@"%@ thread : %@",str,thread);
+//    NSThread *thread = [NSThread currentThread];
+//    NSLog(@"%@ thread : %@",str,thread);
 }
 
 #pragma mark -NSURLSessionDataDelegate

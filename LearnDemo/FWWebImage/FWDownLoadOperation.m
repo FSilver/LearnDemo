@@ -7,7 +7,7 @@
 //
 
 #import "FWDownLoadOperation.h"
-
+#import "FWDataCache.h"
 
 
 @interface FWDownLoadOperation()
@@ -58,9 +58,6 @@
         [self done];
         return;
     }
-    NSLog(@"start");
-    [self printCurentThread:@"start "];
-    
     _dataTask = [_session dataTaskWithRequest:_request];
     self.executing = YES;
     [self.dataTask resume];
@@ -132,6 +129,7 @@
     NSInteger expected = (NSInteger)response.expectedContentLength;
     self.expectedSize = expected;
     self.loadData = [[NSMutableData alloc]initWithCapacity:expected];
+    NSLog(@"expectedSize: %ld",self.expectedSize);
     if(completionHandler){
         completionHandler(NSURLSessionResponseAllow);
     }
@@ -145,12 +143,19 @@
     
     for (FWCallbacksDictionary  *dict  in self.callbackBlockArray) {
         FWDownLoaderProgressBlock progressBlock = dict[kProgressCallbackKey];
-        progressBlock(self.loadData.length,self.expectedSize,self.request.URL);
+        if(progressBlock){
+            progressBlock(self.loadData.length,self.expectedSize,self.request.URL);
+        }
     }
     const NSInteger totalSize = self.loadData.length;
+    NSLog(@"totalSize: %ld",totalSize);
     BOOL finished = (totalSize >= self.expectedSize);
     if(finished){
-        [self callCompletionBlockWithData:data error:nil finished:YES];
+        self.finished = YES;
+        sleep(3);
+        UIImage *image = [[UIImage alloc]initWithData:self.loadData];
+        [[FWDataCache sharedInstance]storeImage:image data:self.loadData key:_request.URL.absoluteString];
+        [self callCompletionBlockWithImage:image data:nil error:nil finished:YES];
     }
 }
 
@@ -172,26 +177,20 @@
 
 -(void)callCompletionBlockWithError:(NSError*)error
 {
-    [self callCompletionBlockWithData:nil error:error finished:NO];
+    [self callCompletionBlockWithImage:nil data:nil error:error finished:NO];
 }
 
--(void)callCompletionBlockWithData:(NSData*)data  error:(NSError*)error  finished:(BOOL)finished
+-(void)callCompletionBlockWithImage:(UIImage*)image data:(NSData*)data  error:(NSError*)error  finished:(BOOL)finished
 {    
     [self done];
     dispatch_async(dispatch_get_main_queue(), ^{
         for (FWCallbacksDictionary  *dict  in self.callbackBlockArray) {
             FWDownLoaderCompletedBlock completedBlock = dict[kCompletedCallbackKey];
-            completedBlock(data,error,finished);
+            completedBlock(image,data,error,finished);
         }
     });
 }
 
-
--(void)printCurentThread:(NSString*)str
-{
-    NSThread *thread = [NSThread currentThread];
-    NSLog(@"%@ thread : %@",str,thread);
-}
 
 @end
 
